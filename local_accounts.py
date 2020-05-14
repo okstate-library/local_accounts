@@ -8,11 +8,11 @@ def main():
     local = pd.read_csv('local.csv')
 
     # Get user expiration date and info for comment in EZproxy file
-    initials = input('Your initials:').upper()
-    program = input('Program name:')
-    year = int(input('Year user access ends (four-digit year):'))
-    month = int(input('Month user access ends (two-digit month):'))
-    day = int(input('Day user access ends (two-digit day):'))
+    initials = input('Your initials: ').upper()
+    program = input('Program name: ')
+    year = int(input('Year user access ends (four-digit year): '))
+    month = int(input('Month user access ends (two-digit month): '))
+    day = int(input('Day user access ends (two-digit day): '))
 
     # Use user's email to create a username
     username = lambda row: row.email.split('@')[0]
