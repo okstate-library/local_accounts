@@ -49,7 +49,12 @@ def password():
     See this article: 
     https://medium.com/better-programming/best-practices-for-generating-secure-passwords-and-tokens-in-python-ebb91d459267
     '''
-    alphabet = string.ascii_letters + (string.digits * 2)
+    # Do not allow the following characters: 0, o, O, l, and I
+    alphabet = string.ascii_letters.replace('o', '')\
+                                   .replace('O', '')\
+                                   .replace('0', '')\
+                                   .replace('l', '')\
+                                   .replace('I', '') + (string.digits * 2).replace('0', '')
     while True:
         password = ''.join(secrets.choice(alphabet) for i in range(14))
         if (any(ch.islower() for ch in password) and \
