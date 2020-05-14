@@ -54,7 +54,8 @@ def password():
                                    .replace('O', '')\
                                    .replace('0', '')\
                                    .replace('l', '')\
-                                   .replace('I', '') + (string.digits * 2).replace('0', '')
+                                   .replace('I', '') + (string.digits * 2).replace('0', '')\
+                                                                          .replace('1', '')
     while True:
         password = ''.join(secrets.choice(alphabet) for i in range(14))
         if (any(ch.islower() for ch in password) and \
