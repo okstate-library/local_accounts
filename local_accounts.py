@@ -51,7 +51,7 @@ def main():
     coordinator = local[['first', 'last', 'email', 'username', 'password']]
     coordinator.to_csv('special_accounts.csv', index=False)
     # CSV file for Alma
-    alma = local[['first', 'last', 'email', 'username', 'password', 'expires']]
+    alma = local[['first', 'last', 'email', 'username', 'password', 'expires', "campus", "user_group", "purge", "address", "address_type", "email_type"]]
     alma.to_csv('alma_accounts.csv', index=False)
     # Text file for EZproxy
     ezproxy_accounts = local[['ezproxy']]
