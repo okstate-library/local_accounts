@@ -10,9 +10,19 @@ def main():
     # Get user expiration date and info for comment in EZproxy file
     initials = input('Your initials: ').upper()
     program = input('Program name: ')
-    year = int(input('Year user access ends (four-digit year): '))
-    month = int(input('Month user access ends (two-digit month): '))
-    day = int(input('Day user access ends (two-digit day): '))
+    expiration_date = input("Enter the program expiration date (YYYY-MM-DD format): ")
+    # Ensure date is formatted correctly
+    try:
+        expiration_date = datetime.datetime(*[ int(num) for num in expiration_date.split("-") ])
+    except TypeError as err:
+        print("\nPlease enter a valid date in YYYY-MM-DD format.\n")
+        raise err
+    # Ensure date is in the future
+    try:
+        assert (expiration_date - datetime.datetime.today()).days >= 0
+    except AssertionError as err:
+        print("\nPlease ensure the program's expiration date is a future date.\n")
+        raise err
 
     # Use user's email to create a username
     username = lambda row: row.email.split('@')[0]
@@ -22,12 +32,20 @@ def main():
     local['password'] = local.apply(lambda row: password(), axis=1)
 
     # Add column for expiration date
-    expires = lambda row: datetime.datetime(year, month, day).strftime("%Y-%m-%d")
+    expires = lambda row: expiration_date.strftime("%Y-%m-%d")
     local['expires'] = local.apply(expires, axis=1)
 
     # Create entries for EZproxy local accounts file
     ezproxy = lambda row: row.username + ':' + row.password + ':IfBefore=' + row.expires
     local['ezproxy'] = local.apply(ezproxy, axis=1)
+
+    # Add columns that are standard for all users
+    local["campus"] = "Stillwater"
+    local["user_group"] = "AFFILIATEZ"
+    local["purge"] = local["expires"]
+    local["address"] = "Distance Learning"
+    local["address_type"] = "School"
+    local["email_type"] = "School"
 
     # CSV file for program coordinator
     coordinator = local[['first', 'last', 'email', 'username', 'password']]
