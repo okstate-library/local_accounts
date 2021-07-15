@@ -21,7 +21,7 @@ def main():
     try:
         assert (expiration_date - datetime.datetime.today()).days >= 0
     except AssertionError as err:
-        print("\nPlease ensure the program's expiration date is a future date.\n")
+        print("\nPlease ensure the program's expiration date is a future date past tomorrow.\n")
         raise err
 
     # Use user's email to create a username
@@ -40,12 +40,12 @@ def main():
     local['ezproxy'] = local.apply(ezproxy, axis=1)
 
     # Add columns that are standard for all users
-    local["campus"] = "Stillwater"
+    local["campus"] = "STW"
     local["user_group"] = "AFFILIATEZ"
     local["purge"] = local["expires"]
     local["address"] = "Distance Learning"
-    local["address_type"] = "School"
-    local["email_type"] = "School"
+    local["address_type"] = "school"
+    local["email_type"] = "school"
 
     # CSV file for program coordinator
     coordinator = local[['first', 'last', 'email', 'username', 'password']]
