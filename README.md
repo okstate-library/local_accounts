@@ -4,6 +4,5 @@ This script creates comma-separated (.csv) files that assist in creating local/t
 
 - `special_accounts.csv`: user accounts and passwords for giving to the program coordinator after setting up the accounts
 - `ezproxy_accounts.txt`: account information for pasting into the `LocalAccounts.txt` configuration file on the EZproxy server
-- `alma_accounts.csv`: account information for uploading accounts into Alma/Primo using the CSV uploader tool
 
 This script requires Python 3 to run and the `pandas` package. See the `requirements.txt` file.
